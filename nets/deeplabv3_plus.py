@@ -151,7 +151,7 @@ class ASPP(nn.Module):
 		return result
 
 class DeepLab(nn.Module):
-    def __init__(self, num_classes, backbone="mobilenetv3", pretrained=True, downsample_factor=16):
+    def __init__(self, num_classes, backbone="mobilenetv3", pretrained=False, downsample_factor=16):
         super(DeepLab, self).__init__()
         if backbone=="xception":
             #----------------------------------#
