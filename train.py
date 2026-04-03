@@ -26,7 +26,8 @@ if __name__ == "__main__":
     num_classes = 2
     backbone = "mobilenetv2"
     pretrained = False
-    model_path = "model_data/deeplab_mobilenetv2.pth"
+    # model_path = "model_data/deeplab_mobilenetv2.pth"
+    model_path = ""
     downsample_factor = 8
     input_shape = [512, 512]
 
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     eval_flag = True
     eval_period = 10
 
-    VOCdevkit_path = "VOCdevkit"
+    VOCdevkit_path = "/home/robot/DeepLab/VOCdevkit"
     dice_loss = True
     focal_loss = False
     cls_weights = np.array([1.0, 2.0], np.float32)
@@ -135,9 +136,9 @@ if __name__ == "__main__":
             cudnn.benchmark = True
             model_train = model_train.cuda()
 
-    with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/train.txt"), "r") as f:
+    with open(os.path.join(VOCdevkit_path, "VOC20071/ImageSets/Segmentation/train.txt"), "r") as f:
         train_lines = f.readlines()
-    with open(os.path.join(VOCdevkit_path, "VOC2007/ImageSets/Segmentation/val.txt"), "r") as f:
+    with open(os.path.join(VOCdevkit_path, "VOC20071/ImageSets/Segmentation/val.txt"), "r") as f:
         val_lines = f.readlines()
     num_train = len(train_lines)
     num_val = len(val_lines)

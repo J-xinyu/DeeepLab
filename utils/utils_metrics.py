@@ -114,18 +114,19 @@ def compute_mIoU(gt_dir, pred_dir, png_name_list, num_classes, name_classes=None
     print(f"Global Accuracy: {acc * 100:.2f}%\n")
 
     # 把整体指标也返回，方便主程序写 Excel
-    return (
-        np.array(hist, np.int32),
-        IoUs,
-        PA_Recall,
-        Precision,
-        F_scores,
-        mPrecision,
-        mRecall,
-        mFscore,
-        mIoU,
-        acc
-    )
+    # return (
+    #     np.array(hist, np.int32),
+    #     IoUs,
+    #     PA_Recall,
+    #     Precision,
+    #     F_scores,
+    #     mPrecision,
+    #     mRecall,
+    #     mFscore,
+    #     mIoU,
+    #     acc
+    # )
+    return np.array(hist, np.int32), IoUs, PA_Recall, Precision
 
 
 # ----------------- 画图相关 ----------------- #
