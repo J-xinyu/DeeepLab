@@ -155,6 +155,26 @@ def mobilenetv2(pretrained=False, **kwargs):
     return model
 
 if __name__ == "__main__":
-    model = mobilenetv2()
-    for i, layer in enumerate(model.features):
-        print(i, layer)
+    from ptflops import get_model_complexity_info
+    
+    # 初始化模型
+    net = mobilenetv2()
+    net.eval()  # 推理模式，不影响计算
+    
+    # 输入尺寸 (C, H, W)，ptflops 自动处理 batch
+    input_shape = (3, 224, 224)
+    # 计算 FLOPs 和参数量
+    flops, params = get_model_complexity_info(net, input_shape, as_strings=False, print_per_layer_stat=False)
+    
+    # 测试前向推理
+    x = torch.randn(1, 3, 224, 224)
+    with torch.no_grad():
+        out = net(x)
+    
+    # 格式化输出
+    print(f"Input shape: {x.shape}")
+    print(f"Output shape: {out.shape}")
+    print(f"Total Params: {params:,}")
+    print(f"Total FLOPs: {flops:,}")
+    print(f"FLOPs (G): {flops / 1e9:.2f} G")  # 单位转换为 G，更直观
+    print(f"Params (M): {params / 1e6:.2f} M")
